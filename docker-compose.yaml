@@ -12,13 +12,11 @@ services:
 
   mongodb:
     image: mongo:4.2
-    hostname: tennis_mongodb
-    ports:
-      - 27017:27017
+    hostname: localhost
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=Aa123456
-      - MONGO_INITDB_DATABASE=ranklistdb
+      - MONGO_INITDB_DATABASE=GYM_mongodb
     volumes:
       - mongo-data:/data/db
       - ./init-db.js:/docker-entrypoint-initdb.d/init-db.js:ro
