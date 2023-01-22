@@ -1,0 +1,33 @@
+version: '3.9'
+services:
+  flask-app:
+    build: .
+    ports:
+      - "5000:5000"
+    links:
+      - mongodb
+    depends_on:
+      mongodb:
+        condition: service_healthy
+
+  mongodb:
+    image: mongo:4.2
+    hostname: tennis_mongodb
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=Aa123456
+      - MONGO_INITDB_DATABASE=ranklistdb
+    volumes:
+      - mongo-data:/data/db
+      - ./init-db.js:/docker-entrypoint-initdb.d/init-db.js:ro
+    healthcheck:
+       test: echo 'db.runCommand("ping").ok'
+       interval: 10s
+       timeout: 10s
+       retries: 5
+volumes:
+  mongo-data:
+
+
