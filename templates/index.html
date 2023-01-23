@@ -4,7 +4,12 @@
   <title> THE ISLAND GYM </title>
 </head>
 <body>
-  <h1> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; THE ISLAND GYM </h1> 
+  <h1>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; THE ISLAND GYM </h1> 
   <style>
     pre{
         font-family: monospace;
@@ -13,42 +18,60 @@
   </style>
     <pre>
 
-                  _
-                           ,--.\`-. __
-                         _,.`. \:/,"  `-._
-                     ,-*" _,.-;-*`-.+"*._ )
-                    ( ,."* ,-" / `.  \.  `.
-                   ,"   ,;"  ,"\../\  \:   \
-                  (   ,"/   / \.,' :   ))  /
-                   \  |/   / \.,'  /  // ,'
-                    \_)\ ,' \.,'  (  / )/
-                        `  \._,'   `"
-                           \../
-                           \../
-                 ~        ~\../           ~~
-          ~~          ~~   \../   ~~   ~      ~~
-     ~~    ~   ~~  __...---\../-...__ ~~~     ~~
-       ~~~~  ~_,--'        \../      `--.__ ~~    ~~
-   ~~~  __,--'              `"             `--.__   ~~~
-~~  ,--'                                         `--.
-   '------......______             ______......------` ~~
- ~~~   ~    ~~      ~ `````---"""""  ~~   ~     ~~
-        ~~~~    ~~  ~~~~       ~~~~~~  ~ ~~   ~~ ~~~  ~
-     ~~   ~   ~~~     ~~~ ~         ~~       ~~   ~~~ ~~ ~
-              ~        ~~       ~~~       ~ ~        ~~       ~~~       ~
+                                                                                        '
+                                                                                        |
+                                                                                  '.  _..._  .'
+                                                                                    .'     '.
+                                                                               '-. /         \ .-'
+                                                                              _ _  ;           ;  _ _
+                                                                                   \         /
+                                                                                .-' '._   _.' '-.
+                                                                                   .   ```   .
+                                                                                  '     |     '
+                                                                                        '
+                                                                                        '
+                                                                                                                        ,--.\`-. __
+                                                                                                                      _,.`. \:/,"  `-._            
+                                                                                                                  ,-*" _,.-;-*`-.+"*._ )
+                                                                                                                 ( ,."* ,-" / `.  \.  `.
+                                                                                                                ,"   ,;"  ,"\../\  \:   \
+                                                                                                               (   ,"/   / \.,' :   ))  /
+                                                                                                                \  |/   / \.,'  /  // ,'
+                                                                                                                 \_)\ ,' \.,'  (  / )/
+                                                                                                                     `  \._,'   `"
+                                                                                                                        \../
+                                                                                                                        \../
+                                                                                                              ~        ~\../           ~~
+                                                                                                       ~~          ~~   \../   ~~   ~      ~~
+                                                                                                  ~~    ~   ~~  __...---\../-...__ ~~~     ~~
+                                                                                                    ~~~~  ~_,--'        \../      `--.__ ~~    ~~
+                                                                                                ~~~  __,--'              `"             `--.__   ~~~
+                                                                                             ~~  ,--'                                         `--.
+                                                                                                '------......______             ______......------` ~~
+                                                                                              ~~~   ~    ~~      ~ `````---"""""  ~~   ~     ~~
+                                                                                                     ~~~~    ~~  ~~~~       ~~~~~~  ~ ~~   ~~ ~~~  ~
+                                                                                                  ~~   ~   ~~~     ~~~ ~         ~~       ~~   ~~~ ~~ ~
+                                                                                                           ~        ~~       ~~~       ~ ~        ~~       ~~~       ~
 
-    <form action="quote" method="get">
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<input type="submit" value="let see your quote">
-      </form>
-      
-      
-      </pre>
-      
-      <form action="new-quote" method="post">
-      <label for="inputField">Enter New Quote:</label>
-      <input type="text" id="inputField" name="quote">
-      <input type="submit" value="Update">
-      </form> 
+                                                                                                                 <b>Main APIS:</b>
+                                                                                                               GET URL/ = This Home page
+                                                                                               GET URL/subscriptions = Full list of all the subscriptions in the gym
+                                                                                               GET URL/subscriptions/ids = ID of all the subscriptions
+                                                                                             GET URL/subscriptions/training_program = Full list of the subscriptions by the training_program
+                                                                                               GET URL/subscription/id = Details about spacific subscription
+                                                                                               POST URL/subscription = Inserting a new subscription to the gym
+                                                                                                 PUT URL/subscription/id = Updating existing subscription
+                                                                                                   DELETE URL/subscription/id = Delete a subscription in the gym
+                                                                                                               GET /subscription/id/BMI= Checking the BMI of the subscription
+
+
+
+<form action="subscription" method="post">
+  <label for="inputField">first_name:</label><input type="text" id="first_name" name="first_name">  <label for="inputField">last_name:</label>  <input type="text" id="last_name" name="last_name">
+  <label for="inputField">birth_date:</label><input type="text" id="birth_date" name="birth_date">  <label for="inputField">weight:</label><input type="text" id="weight" name="weight">
+  <label for="inputField">height:</label><input type="text" id="height" name="height"> <label for="inputField">training_program:</label><input type="text" id="training_program" name="training_program">
+  <input type="submit" value="Update">
+</form>                                                                                                             
 </body>
 </html>
 

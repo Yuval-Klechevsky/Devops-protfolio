@@ -47,7 +47,7 @@ def show_all_ids_subcriptions():
 def get_subscription_by_progrem(training_program):
     if request.method == 'GET': 
         db = get_db()
-        subscription = db["GYM_mongodb_tb"].find_one({"training_program":training_program})
+        subscription = db["GYM_mongodb_tb"].find({"training_program":training_program})
         sub = dumps(subscription)
         return sub
 
@@ -108,28 +108,24 @@ def get_delete_subscription(id):
 @app.route("/subscription/<id>/BMI", methods =[ "GET" ])
 def get_BMI_subscription(id):
     if request.method == 'GET':
-        weight=request.get_json(force=True)["weight"],
-        height=request.get_json(force=True)["height"],
-        BMI = float(weight) /float((height/100))**2
-            if BMI <= 18.4:
-                msg = jsonify(Message='Under Weight')
-            if BMI <= 24.9:
-                msg = jsonify(Message='Normal Weight')
-            if BMI <= 29.9:
-                msg = jsonify(Message='Over Weight')
-            if BMI <= 34.9:
-                msg = jsonify(Message='Obesity Weight (Class 1)')
-            if BMI <= 39.9:
-                msg = jsonify(Message='Obesity Weight (Class 2)')
-            if BMI > 39.9:
-                msg = jsonify(Message='Obesity Weight (Class 3)')
+        db = get_db()
+        weight= (db["GYM_mongodb_tb"].find_one({"_id":ObjectId(id)},{"weight":1}))
+        height= (db["GYM_mongodb_tb"].find_one({"_id":ObjectId(id)},{"height":1}))
+
+        BMI = round((float(weight) / float((height/100))**2),2)
+        if BMI <= 18.4:
+            msg = jsonify(Message='Your BMI Is Under Weight')
+        if BMI <= 24.9:
+            msg = jsonify(Message='Your BMI Is Normal Weight')
+        if BMI <= 29.9:
+            msg = jsonify(Message='Your BMI Is Over Weight')
+        if BMI <= 34.9:
+            msg = jsonify(Message='Your BMI Is Obesity Weight (Class 1)')
+        if BMI <= 39.9:
+            msg = jsonify(Message='Your BMI Is Obesity Weight (Class 2)')
+        if BMI > 39.9:
+            msg = jsonify(Message='Your BMI Is Obesity Weight (Class 3)')
     return msg
-
-
-
- 
-
-        
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=5000)
