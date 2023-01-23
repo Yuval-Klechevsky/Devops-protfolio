@@ -22,8 +22,113 @@ def Home_Website():
 def fetch_subscriptions():
     db = get_db()
     _subscriptions= db["GYM_mongodb_tb"].find()
-    subscriptions = [{"id": subscription["id"],"first_name": subscription["first_name"],"last_name": subscription["last_name"],"birth_date":subscription["birth_date"],"training_program":subscription["training_program"]}  for subscription in _subscriptions]
+    subscriptions = [{"first_name": subscription["first_name"],
+                      "last_name": subscription["last_name"],
+                      "birth_date":subscription["birth_date"],
+                      "weight":subscription["weight"],
+                      "height":subscription["height"],
+                      "training_program":subscription["training_program"]}
+                       for subscription in _subscriptions]
+
     return jsonify({"subscriptions":subscriptions})
+
+@app.route("/subscriptions/ids", methods=[ "GET"])
+def show_all_ids_subcriptions():
+    db = get_db()
+    _subscriptions= db["GYM_mongodb_tb"].find()
+    subscriptions = [{"_id": str(subscription["_id"]),
+                      "first_name": subscription["first_name"],
+                      "last_name": subscription["last_name"]}  
+                       for subscription in _subscriptions]
+
+    return jsonify({"subscriptions":subscriptions})
+
+@app.route("/subscriptions/<training_program>", methods=[ "GET"])
+def get_subscription_by_progrem(training_program):
+    if request.method == 'GET': 
+        db = get_db()
+        subscription = db["GYM_mongodb_tb"].find_one({"training_program":training_program})
+        sub = dumps(subscription)
+        return sub
+
+@app.route("/subscription/<id>", methods=[ "GET"])
+def get_subscription(id):
+    if request.method == 'GET': 
+        db = get_db()
+        subscription = db["GYM_mongodb_tb"].find_one({"_id":ObjectId(id)})
+        sub = dumps(subscription)
+        return sub
+
+@app.route("/subscription", methods=[ "POST"])
+def get_add_subscription():
+    if request.method == 'POST': 
+        first_name_1 = request.get_json(force=True)["first_name"]
+        last_name_1 = request.get_json(force=True)["last_name"]
+        birth_date_1 = request.get_json(force=True)["birth_date"] 
+        training_program_1 = request.get_json(force=True)["training_program"]
+        weight_1=request.get_json(force=True)["weight"],
+        height_1=request.get_json(force=True)["height"],
+        db = get_db()
+        subscription= db["GYM_mongodb_tb"].insert_one({"first_name": first_name_1 ,
+                                                       "last_name": last_name_1 ,
+                                                       "birth_date":birth_date_1 ,
+                                                       "height":height_1,
+                                                       "weight":weight_1,
+                                                       "training_program":training_program_1})
+
+        sub = jsonify(Message='User added successfully!')
+        return sub
+
+@app.route("/subscription/<id>", methods=[ "PUT"])
+def get_update_subscription(id):
+    if request.method == 'PUT': 
+        first_name_2 = request.get_json(force=True)["first_name"]
+        last_name_2 = request.get_json(force=True)["last_name"]
+        birth_date_2 = request.get_json(force=True)["birth_date"] 
+        training_program_2 = request.get_json(force=True)["training_program"]
+        db = get_db()
+        subscription= db["GYM_mongodb_tb"].update_one({"_id":ObjectId(id)},
+                                                      {'$set':{"first_name": first_name_2,
+                                                       "last_name": last_name_2 ,"birth_date":birth_date_2,
+                                                       "training_program":training_program_2}})
+        msg = jsonify(Message='User updated successfully!')
+        return msg
+
+@app.route("/subscription/<id>", methods=[ "DELETE"])
+def get_delete_subscription(id):
+    if request.method == 'DELETE': 
+        db = get_db()
+        subscription= db["GYM_mongodb_tb"].delete_one({"_id":ObjectId(id)})
+        if subscription.deleted_count:
+            msg = jsonify(Message='User delete successfully!')
+        else:
+            msg = jsonify(Message='Internal Problem!')
+    return msg
+
+@app.route("/subscription/<id>/BMI", methods =[ "GET" ])
+def get_BMI_subscription(id):
+    if request.method == 'GET':
+        weight=request.get_json(force=True)["weight"],
+        height=request.get_json(force=True)["height"],
+        BMI = float(weight) /float((height/100))**2
+            if BMI <= 18.4:
+                msg = jsonify(Message='Under Weight')
+            if BMI <= 24.9:
+                msg = jsonify(Message='Normal Weight')
+            if BMI <= 29.9:
+                msg = jsonify(Message='Over Weight')
+            if BMI <= 34.9:
+                msg = jsonify(Message='Obesity Weight (Class 1)')
+            if BMI <= 39.9:
+                msg = jsonify(Message='Obesity Weight (Class 2)')
+            if BMI > 39.9:
+                msg = jsonify(Message='Obesity Weight (Class 3)')
+    return msg
+
+
+
+ 
+
         
 
 if __name__ == "__main__":

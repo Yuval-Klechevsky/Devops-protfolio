@@ -25,6 +25,18 @@ services:
        interval: 10s
        timeout: 10s
        retries: 5
+  
+  # nginx:
+    # build:
+      # context: .
+      # dockerfile: nginx.dockerfile
+    # ports:
+      # - 80:80
+      # - 443:443
+    # volumes:
+      # - ./templates:/usr/share/nginx/html
+    # depends_on:
+      # - flask-app
 volumes:
   mongo-data:
 
