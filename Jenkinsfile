@@ -35,7 +35,6 @@ pipeline {
             steps{
                 sh  "docker-compose build --no-cache"
                 sh  "docker-compose up -d"
-                
             }          
         }
         stage("Unit-test"){
@@ -43,17 +42,24 @@ pipeline {
             sh  """
                 sleep 5
                 curl 3.9.146.148:80
-
+                
                 """
             }
         }
         stage("E2E test app"){
             steps{
                 sh  """ 
-                    cd tests   
+                    cd tests
                     ./unit-test.sh 
                     cat response.txt
 
+                    if [ \$? -eq 0 ]; then
+                        echo E2E Success
+                        docker-compose down -v
+                    else
+                        echo E2E fail
+                        docker-compose down -v
+                    fi
                     
                     """
             }   
