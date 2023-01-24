@@ -45,5 +45,22 @@ pipeline {
                 """
             }
         }
+        stage("E2E test app"){
+            steps{
+                sh  """ 
+                    ./tests/unit-test.sh 
+                    cat response.txt
+
+                    if [ \$? -eq 0 ]; then
+                    echo E2E Success
+                    docker-compose down
+                    else
+                        echo E2E fail
+                        docker-compose down
+                    fi
+                    
+                    """
+            }   
+        }
     }
 }
