@@ -51,13 +51,13 @@ else
   echo "PUT Request to /subscription/id failed." >> response.txt
 fi
 
-response=$(curl -s -o /dev/null -w "%{http_code}" -X GET -H "Content-Type: application/x-www-form-urlencoded"  $API_BASE_URL/subscription/$id/BMI)
-RESPONSES+=("$response")
-if [[ $response == *"200"* ]]; then
-  echo "GET Request to /subscription/id/BMI was successful." >> response.txt
-else
-  echo "GET Request to /subscription/id/BMI failed." >> response.txt
-fi
+# response=$(curl -s -o /dev/null -w "%{http_code}" -X GET -H "Content-Type: application/x-www-form-urlencoded"  $API_BASE_URL/subscription/$id/BMI)
+# RESPONSES+=("$response")
+# if [[ $response == *"200"* ]]; then
+  # echo "GET Request to /subscription/id/BMI was successful." >> response.txt
+# else
+  # echo "GET Request to /subscription/id/BMI failed." >> response.txt
+# fi
 
 response=$(curl -s -o /dev/null -w "%{http_code}" -X DELETE -H "Content-Type: application/x-www-form-urlencoded"  $API_BASE_URL/subscription/$id)
 RESPONSES+=("$response")

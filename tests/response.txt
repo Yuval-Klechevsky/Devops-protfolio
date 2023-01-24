@@ -1,8 +1,0 @@
-GET Request to / was successful.
-GET Request to /subscriptions was successful.
-GET Request to /subscriptions/ids was successful.
-GET Request to /subscriptions/training_program was successful.
-POST Request to /subscription was successful.
-PUT Request to /subscription was successful.
-GET Request to /subscription/id/BMI failed.
-DELETE Request to /subscription was successful.
