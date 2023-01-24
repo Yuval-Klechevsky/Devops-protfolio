@@ -24,12 +24,23 @@ pipeline {
                         $class: 'AmazonWebServicesCredentialsBinding',credentialsId: "138f10b8-eef0-4d2b-aae1-9ad183d6b9f7",accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                         secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                     sh  """
-                        aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com       
-                            aws ec2 describe-instances --region=eu-west-2            
+                        aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com 
+
                         """
                     }
                 }
             }
+        }
+        stage("Build Containers"){
+                sh  "docker-compose build --no-cache"
+                sh  "docker-compose up -d"          
+        }
+        stage("Unit-test"){
+            sh  """
+                sleep 5
+                curl 3.9.146.148:80
+                """
+
         }
     }
 }
