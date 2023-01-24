@@ -9,7 +9,7 @@ services:
         condition: service_healthy
 
   mongodb:
-      build:
+    build:
       context: .
       dockerfile: mongo.dockerfile
     environment:
