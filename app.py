@@ -112,7 +112,7 @@ def get_BMI_subscription(id):
         weight= ((db["GYM_mongodb_tb"].find_one({"_id":ObjectId(id)},{"weight":1}))) 
         height= ((db["GYM_mongodb_tb"].find_one({"_id":ObjectId(id)},{"height":1})))
 
-        BMI = round(((((float(weight["weight"][0]))) / (float(height["height"][0]))/100)**2),2)
+        BMI = round(((((float(weight["weight"]))) / (float(height["height"]))/100)**2),2)
         if BMI <= 18.4:
             msg = jsonify(Message='Your BMI Is Under Weight')
         if BMI <= 24.9:
