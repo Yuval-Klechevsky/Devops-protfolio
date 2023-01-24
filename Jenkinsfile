@@ -32,15 +32,18 @@ pipeline {
             }
         }
         stage("Build Containers"){
+            steps{
                 sh  "docker-compose build --no-cache"
-                sh  "docker-compose up -d"          
+                sh  "docker-compose up -d"
+            }          
         }
         stage("Unit-test"){
+            steps{
             sh  """
                 sleep 5
                 curl 3.9.146.148:80
                 """
-
+            }
         }
     }
 }
