@@ -6,7 +6,7 @@ db.GYM_mongodb_tb.insertMany([
         "first_name": "Carlos ",
         "last_name": "Alcaraz" ,
         "birth_date":"5/5/2003",
-        "weight": "67.2 ",
+        "weight": "67.2",
         "height": "176",
         "training_program": "AB",
     },

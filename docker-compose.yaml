@@ -2,8 +2,6 @@ version: '3.9'
 services:
   flask-app:
     build: .
-    ports:
-      - "5000:5000"
     links:
       - mongodb
     depends_on:
@@ -26,17 +24,17 @@ services:
        timeout: 10s
        retries: 5
   
-  # nginx:
-    # build:
-      # context: .
-      # dockerfile: nginx.dockerfile
-    # ports:
-      # - 80:80
-      # - 443:443
-    # volumes:
-      # - ./templates:/usr/share/nginx/html
-    # depends_on:
-      # - flask-app
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx.dockerfile
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./templates:/usr/share/nginx/html
+    depends_on:
+      - flask-app
 volumes:
   mongo-data:
 

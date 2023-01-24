@@ -109,10 +109,10 @@ def get_delete_subscription(id):
 def get_BMI_subscription(id):
     if request.method == 'GET':
         db = get_db()
-        weight= (db["GYM_mongodb_tb"].find_one({"_id":ObjectId(id)},{"weight":1}))
-        height= (db["GYM_mongodb_tb"].find_one({"_id":ObjectId(id)},{"height":1}))
+        weight= ((db["GYM_mongodb_tb"].find_one({"_id":ObjectId(id)},{"weight":1})))
+        height= ((db["GYM_mongodb_tb"].find_one({"_id":ObjectId(id)},{"height":1})))
 
-        BMI = round((float(weight) / float((height/100))**2),2)
+        BMI = round(((((float(weight["weight"]))) / (float(height["height"]))/100)**2),2)
         if BMI <= 18.4:
             msg = jsonify(Message='Your BMI Is Under Weight')
         if BMI <= 24.9:
