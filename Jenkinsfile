@@ -20,11 +20,12 @@ pipeline {
         stage("AWS login"){
               steps{
                 script{
-                    sh """
+                    sh  """
                     aws configure set aws_access_key_id AKIAZMC2XWDGDRI2BSV6
                     aws configure set aws_secret_access 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
                     aws configure set default.region eu-west-2
-                    aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com                    """
+                    aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com                   
+                         """
                 }
             }
         }
