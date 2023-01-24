@@ -73,7 +73,7 @@ pipeline {
         stage("E2E test app"){
             when {
                 anyOf {
-                    branch 'main';
+                    branch 'main'
                     branch 'feature'
                 }
             }
