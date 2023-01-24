@@ -1,4 +1,4 @@
 FROM mongo:4.2
 
-COPY ./init-db.js /docker-entrypoint-initdb.d
+COPY ./init-db.js /init-db.js
 
