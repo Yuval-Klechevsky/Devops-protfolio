@@ -14,7 +14,7 @@ pipeline {
         stage("checkout") {
             when {
                 anyOf {
-                    branch 'main';
+                    branch 'main'
                     branch 'feature'
                 }
             }
@@ -26,7 +26,7 @@ pipeline {
         stage("AWS login"){
             when {
                 anyOf {
-                    branch 'main';
+                    branch 'main'
                     branch 'feature'
                 }
             }
@@ -46,7 +46,7 @@ pipeline {
         stage("Build Containers"){
             when {
                 anyOf {
-                    branch 'main';
+                    branch 'main'
                     branch 'feature'
                 }
             }
@@ -58,7 +58,7 @@ pipeline {
         stage("Unit-test"){
             when {
                 anyOf {
-                    branch 'main';
+                    branch 'main'
                     branch 'feature'
                 }
             }
