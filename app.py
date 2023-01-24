@@ -131,9 +131,11 @@ def get_BMI_subscription(id):
 def id_for_e2e_testing():
     if request.method =='GET':
         db = get_db()
-        ids=((db["GYM_mongodb_tb"].find_one({},{"_id":1})))
-        spacific_id=str(ids["_id"])
-        return spacific_id
+        mycol = db["GYM_mongodb_tb"]
+        result = list(mycol.find({}, {"_id": 1}))
+        random_id = choice(result)["_id"]
+        return str(random_id)
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=5000)
