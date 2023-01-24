@@ -46,9 +46,9 @@ fi
 response=$(curl -s -o /dev/null -w "%{http_code}" -X PUT -H "Content-Type: application/x-www-form-urlencoded" -d '{"first_name": "Yuval ","last_name": "Klechevsky" ,"birth_date":"27/10/2000","weight": "73","height": "174","training_program": "Full-Body"}' $API_BASE_URL/subscription/$id)
 RESPONSES+=("$response")
 if [[ $response == *"200"* ]]; then
-  echo "PUT Request to /subscription was successful." >> response.txt
+  echo "PUT Request to /subscription/id was successful." >> response.txt
 else
-  echo "PUT Request to /subscription failed." >> response.txt
+  echo "PUT Request to /subscription/id failed." >> response.txt
 fi
 
 response=$(curl -s -o /dev/null -w "%{http_code}" -X GET -H "Content-Type: application/x-www-form-urlencoded"  $API_BASE_URL/subscription/$id/BMI)
