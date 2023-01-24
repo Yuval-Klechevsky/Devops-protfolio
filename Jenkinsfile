@@ -12,12 +12,24 @@ pipeline {
     }
     stages{
         stage("checkout") {
+            when {
+                anyOf {
+                    branch 'main';
+                    branch 'feature'
+                }
+            }
             steps {
                 deleteDir()
                 checkout scm
             }
         }
         stage("AWS login"){
+            when {
+                anyOf {
+                    branch 'main';
+                    branch 'feature'
+                }
+            }
               steps{
                 script{
                     withCredentials([[
@@ -32,12 +44,24 @@ pipeline {
             }
         }
         stage("Build Containers"){
+            when {
+                anyOf {
+                    branch 'main';
+                    branch 'feature'
+                }
+            }
             steps{
                 sh  "docker-compose build --no-cache"
                 sh  "docker-compose up -d"
             }          
         }
         stage("Unit-test"){
+            when {
+                anyOf {
+                    branch 'main';
+                    branch 'feature'
+                }
+            }
             steps{
             sh  """
                 sleep 5
@@ -47,6 +71,12 @@ pipeline {
             }
         }
         stage("E2E test app"){
+            when {
+                anyOf {
+                    branch 'main';
+                    branch 'feature'
+                }
+            }
             steps{
                 sh  """ 
                     cd tests
@@ -63,6 +93,28 @@ pipeline {
                     
                     """
             }   
+        }
+        stage("Tagging commit and tags"){
+          when {
+	        expression {
+		        return BRANCH == 'main';
+                }
+            }
+            steps{
+
+            }
+        }
+        stage("Push to ECR"){
+            when {
+                expression {
+                return BRANCH == 'main';
+                }
+            }
+            steps{
+                script{
+                   sh "docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${Ver_Calc}"
+                }
+            }
         }
     }
 }
