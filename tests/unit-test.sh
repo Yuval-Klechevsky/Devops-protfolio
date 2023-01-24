@@ -51,7 +51,7 @@ else
   echo "PUT Request to /subscription failed." >> response.txt
 fi
 
-response=$(curl -s -o /dev/null -w "%{http_code}" -X GET -H "Content-Type: application/x-www-form-urlencoded" -d '{"first_name": "Yuval ","last_name": "Klechevsky" ,"birth_date":"27/10/2000","weight": "73","height": "174","training_program": "Full-Body"}' $API_BASE_URL/subscription/$id/BMI)
+response=$(curl -s -o /dev/null -w "%{http_code}" -X GET -H "Content-Type: application/x-www-form-urlencoded"  $API_BASE_URL/subscription/$id/BMI)
 RESPONSES+=("$response")
 if [[ $response == *"200"* ]]; then
   echo "GET Request to /subscription/id/BMI was successful." >> response.txt
