@@ -9,8 +9,9 @@ services:
         condition: service_healthy
 
   mongodb:
-    image: mongo:4.2
-    hostname: localhost
+      build:
+      context: .
+      dockerfile: mongo.dockerfile
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=Aa123456

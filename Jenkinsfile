@@ -49,7 +49,8 @@ pipeline {
         stage("E2E test app"){
             steps{
                 sh  """ 
-                    ./tests/unit-test.sh 
+                    cd tests   
+                    ./unit-test.sh 
                     cat response.txt
 
                     
