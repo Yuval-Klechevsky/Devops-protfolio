@@ -1,6 +1,5 @@
 FROM mongo:4.2
 
-COPY ./init-db.js /docker-entrypoint-initdb.d/init-db.js:ro
+COPY ./init-db.js /docker-entrypoint-initdb.d/init-db.js
 
-ENTRYPOINT ./docker-entrypoint-initdb.d/init-db.js:ro
 
