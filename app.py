@@ -109,7 +109,7 @@ def get_delete_subscription(id):
 def get_BMI_subscription(id):
     if request.method == 'GET':
         db = get_db()
-        weight= ((db["GYM_mongodb_tb"].find_one({"_id":ObjectId(id)},{"weight":1})))
+        weight= ((db["GYM_mongodb_tb"].find_one({"_id":ObjectId(id)},{"weight":1}))) 
         height= ((db["GYM_mongodb_tb"].find_one({"_id":ObjectId(id)},{"height":1})))
 
         BMI = round(((((float(weight["weight"]))) / (float(height["height"]))/100)**2),2)
@@ -126,6 +126,14 @@ def get_BMI_subscription(id):
         if BMI > 39.9:
             msg = jsonify(Message='Your BMI Is Obesity Weight (Class 3)')
     return msg
+
+@app.route("/id-for-test" , methods= [ "GET" ])
+def id_for_e2e_testing():
+    if request.method =='GET':
+        db = get_db()
+        ids=((db["GYM_mongodb_tb"].find_one({},{"_id":1})))
+        spacific_id=str(ids["_id"])
+        return spacific_id
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=5000)
