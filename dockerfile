@@ -1,4 +1,4 @@
-FROM python:3.8
+FROM python:3.8--slim  
 
 COPY ./templates /app/templates
 
@@ -13,6 +13,9 @@ WORKDIR /app
 RUN pip install -r requirements.txt
 
 ENTRYPOINT python3 app.py
+
+
+
 
 
 
