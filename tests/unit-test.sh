@@ -33,7 +33,7 @@ else
   echo "GET Request to /subscriptions/training_program failed." >> response.txt
 fi
 
-response=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/x-www-form-urlencoded" -d {"first_name": "Lebron ","last_name": "James" ,"birth_date":"30/12/1984","weight": "113","height": "206","training_program": "Full-Body"} $API_BASE_URL/subscription)
+response=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/x-www-form-urlencoded" -d '{"first_name": "Lebron ","last_name": "James" ,"birth_date":"30/12/1984","weight": "113","height": "206","training_program": "Full-Body"}' $API_BASE_URL/subscription)
 RESPONSES+=("$response")
 if [[ $response == *"200"* ]]; then
   echo "GET Request to /subscription was successful." >> response.txt
