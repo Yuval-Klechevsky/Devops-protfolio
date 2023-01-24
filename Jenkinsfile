@@ -42,7 +42,7 @@ pipeline {
             sh  """
                 sleep 5
                 curl 3.9.146.148:80
-                docker-compose down -v
+                
                 """
             }
         }
