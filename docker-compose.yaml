@@ -31,8 +31,6 @@ services:
     ports:
       - 80:80
       - 443:443
-    volumes:
-      - ./templates:/usr/share/nginx/html
     depends_on:
       - flask-app
 volumes:
