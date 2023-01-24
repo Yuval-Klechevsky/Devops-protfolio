@@ -100,9 +100,6 @@ pipeline {
 		        return BRANCH == 'main';
                 }
             }
-            steps{
-
-            }
         }
         stage("Push to ECR"){
             when {
