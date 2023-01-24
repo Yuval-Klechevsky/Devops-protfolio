@@ -94,24 +94,24 @@ pipeline {
                     """
             }   
         }
-        stage("Tagging commit and tags"){
-          when {
-	        expression {
-		        return BRANCH == 'main';
-                }
-            }
-        }
-        stage("Push to ECR"){
-            when {
-                expression {
-                return BRANCH == 'main';
-                }
-            }
-            steps{
-                script{
-                   sh "docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${Ver_Calc}"
-                }
-            }
-        }
+        // stage("Tagging commit and tags"){
+            // when {
+	        // expression {
+		        // return BRANCH == 'main';
+                // }
+            // }
+        // }
+        // stage("Push to ECR"){
+            // when {
+                // expression {
+                // return BRANCH == 'main';
+                // }
+            // }
+            // steps{
+                // script{
+                //    sh "docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${Ver_Calc}"
+                // }
+            // }
+        // }
     }
 }
