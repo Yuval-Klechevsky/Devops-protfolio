@@ -42,6 +42,7 @@ pipeline {
             sh  """
                 sleep 5
                 curl 3.9.146.148:80
+                docker-compose down -v
                 """
             }
         }
@@ -52,11 +53,11 @@ pipeline {
                     cat response.txt
 
                     if [ \$? -eq 0 ]; then
-                    echo E2E Success
-                    docker-compose down
+                        echo E2E Success
+                        docker-compose down -v
                     else
                         echo E2E fail
-                        docker-compose down
+                        docker-compose down -v
                     fi
                     
                     """
