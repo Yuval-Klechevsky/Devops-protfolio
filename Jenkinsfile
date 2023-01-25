@@ -53,8 +53,8 @@ pipeline {
             }
             steps{
                 sh  "docker build -t ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME} ."
-                sh  "docker-compose build --no-cache"
-                sh  "docker-compose up -d"
+                sh  "docker-compose -f docker-compose.yaml build --no-cache"
+                sh  "docker-compose -f docker-compose.yaml up -d"
             }          
         }
         stage("Unit-test"){
@@ -87,10 +87,10 @@ pipeline {
 
                     if [ \$? -eq 0 ]; then
                         echo E2E Success
-                        docker-compose down -v
+                        docker-compose -f docker-compose.yaml down -v
                     else
                         echo E2E fail
-                        docker-compose down -v
+                        docker-compose -f docker-compose.yaml down -v
                     fi
                     
                     """
