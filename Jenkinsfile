@@ -148,8 +148,6 @@ pipeline {
                     sh "scp ./templates/index.html ubuntu@3.8.133.86:/home/ubuntu/templates/"
                     sh "scp ./deploy.sh ubuntu@3.8.133.86:/home/ubuntu"
                     sh "ssh ubuntu@3.8.133.86 bash deploy.sh"
-
-
                 }
             }
         }
