@@ -87,10 +87,10 @@ pipeline {
 
                     if [ \$? -eq 0 ]; then
                         echo E2E Success
-                        docker-compose -f docker-compose.yaml down -v
+                        docker-compose down -v
                     else
                         echo E2E fail
-                        docker-compose -f docker-compose.yaml down -v
+                        docker-compose down -v
                     fi
                     
                     """
