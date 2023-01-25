@@ -137,17 +137,7 @@ pipeline {
         stage("Deploy to Prodaction"){
             steps{
                 script{
-                    sh "ssh ubuntu@3.8.133.86 mkdir GYM-protfolio"
-                    sh "scp ./requirements.txt  ubuntu@3.8.133.86:/home/ubuntu/GYM-protfolio"
-                    sh "scp ./mongo.dockerfile  ubuntu@3.8.133.86:/home/ubuntu/GYM-protfolio"
-                    sh "scp ./nginx.dockerfile  ubuntu@3.8.133.86:/home/ubuntu/GYM-protfolio"
-                    sh "scp ./docker-compose-prod.yaml  ubuntu@3.8.133.86:/home/ubuntu/GYM-protfolio"
-                    sh "scp ./init-db.js ubuntu@3.8.133.86:/home/ubuntu/GYM-protfolio"
-                    sh "scp ./app.py ubuntu@3.8.133.86:/home/ubuntu/GYM-protfolio"
-                    sh "scp ./tests/unit-test.sh ubuntu@3.8.133.86:/home/ubuntu/GYM-protfolio/tests"
-                    sh "scp ./nginx/nginx.conf ubuntu@3.8.133.86:/home/ubuntu/GYM-protfolio/nginx"
-                    sh "scp ./templates/index.html ubuntu@3.8.133.86:/home/ubuntu/GYM-protfolio/templates"
-                    sh "scp ./deploy.sh ubuntu@3.8.133.86:/home/ubuntu/GYM-protfolio"
+                    sh ".copy.sh"
                     sh "ssh ubuntu@3.8.133.86 ./GYM-protfolio/deploy.sh"
                 }
             }
