@@ -15,5 +15,4 @@ else
     NEW_PATCH=`expr $PATCH + 1`
     Version="${MAJOR}.${MINOR}.${NEW_PATCH}"
 fi
-
 echo $Version
