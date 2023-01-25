@@ -101,13 +101,11 @@ pipeline {
             steps{ 
                 script{
                           env.GIT_COMMIT_MSG = sh(script: "git log -1 --pretty=%B ${env.GIT_COMMIT}", returnStdout: true).trim()
-                    if(GIT_COMMIT_MSG.contains("version")){
-                        withCredentials([gitUsernamePassword(credentialsId: "94c3e575-d774-4321-8b7b-7f3544ee446e", gitToolName: 'Default')]){
+                        if(GIT_COMMIT_MSG.contains("version")){
                             sh  """
                                 git switch main
                                 git fetch origin --tags
-                                git tag --list
-
+                                git tag --lis   
                                 """
                             Ver_Calc=sh(script: "bash tag_calc.sh ${GIT_COMMIT_MSG}",returnStdout: true).trim()
                             New_tag=Ver_Calc.split("\n").last()
@@ -117,7 +115,6 @@ pipeline {
                                 git push origin ${New_tag}
                                 git fetch
                                 """
-                        }
                     }
                 }
             }
