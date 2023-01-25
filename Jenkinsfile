@@ -106,7 +106,6 @@ pipeline {
                                 git switch main
                                 git fetch origin --tags
                                 git tag --list
-                                   
                                 """
                             Ver_Calc=sh(script: "bash tags-init.sh ${GIT_COMMIT_MSG}",returnStdout: true).trim()
                             New_tag=Ver_Calc.split("\n").last()
