@@ -143,9 +143,9 @@ pipeline {
                     sh "scp ./docker-compose-prod.yaml  ubuntu@3.8.133.86:/home/ubuntu"
                     sh "scp ./init-db.js ubuntu@3.8.133.86:/home/ubuntu"
                     sh "scp ./app.py ubuntu@3.8.133.86:/home/ubuntu"
-                    sh "scp ./tests/unit-test.sh ubuntu@3.8.133.86:/home/ubuntu/tests/"
-                    sh "scp ./nginx/nginx.conf ubuntu@3.8.133.86:/home/ubuntu/nginx/"
-                    sh "scp ./templates/index.html ubuntu@3.8.133.86:/home/ubuntu/templates/"
+                    sh "scp ./tests/unit-test.sh ubuntu@3.8.133.86:/home/ubuntu/tests"
+                    sh "scp ./nginx/nginx.conf ubuntu@3.8.133.86:/home/ubuntu/nginx"
+                    sh "scp ./templates/index.html ubuntu@3.8.133.86:/home/ubuntu/templates"
                     sh "scp ./deploy.sh ubuntu@3.8.133.86:/home/ubuntu"
                     sh "ssh ubuntu@3.8.133.86 bash deploy.sh"
                 }
