@@ -100,17 +100,21 @@ pipeline {
             }
             steps{ 
                 script{
-                    Ver_Calc=sh (script: "bash tags-init.sh ",returnStdout: true).trim()
-                    echo "${Ver_Calc}"
-                    sh  """
-                        git tag --list
-                        git switch main
-                        git fetch origin --tags
-                        git tag ${Ver_Calc}
-                        git push origin ${Ver_Calc}
-                        git fetch
+                        message = sh(script: "git log -1 --pretty=%B ${env.GIT_COMMIT}", returnStdout: true).trim()
+                    if(message.contains("version/*")){
+                        echo "${message}"
+                        Ver_Calc=sh (script: "bash tags-init.sh ",returnStdout: true).trim()
+                        echo "${Ver_Calc}"
+                        sh  """     
 
-                        """
+                            git tag --list
+                            git switch main
+                            git fetch origin --tags
+                            git tag ${Ver_Calc}
+                            git push origin ${Ver_Calc}
+                            git fetch
+
+                            """
                 }
             }
         }
