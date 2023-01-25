@@ -101,7 +101,7 @@ pipeline {
             steps{ 
                 script{
                         message = sh(script: "git log -1 --pretty=%B ${env.GIT_COMMIT}", returnStdout: true).trim()
-                    if(message.contains("version/*")){
+                    if(message.contains("version")){
                         echo "${message}"
                         Ver_Calc=sh (script: "bash tags-init.sh ",returnStdout: true).trim()
                         echo "${Ver_Calc}"
@@ -124,7 +124,7 @@ pipeline {
             }
             steps{
                 script{
-                   sh "docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${Ver_Calc}"
+                    sh "docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${Ver_Calc}"
                 }
             }
         }
