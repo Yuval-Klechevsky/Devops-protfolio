@@ -148,7 +148,7 @@ pipeline {
                     sh "scp ./nginx/nginx.conf ubuntu@3.8.133.86:/home/ubuntu/GYM-protfolio/nginx"
                     sh "scp ./templates/index.html ubuntu@3.8.133.86:/home/ubuntu/GYM-protfolio/templates"
                     sh "scp ./deploy.sh ubuntu@3.8.133.86:/home/ubuntu/GYM-protfolio"
-                    sh "ssh ubuntu@3.8.133.86 bash /GYM-protfolio/deploy.sh"
+                    sh "ssh ubuntu@3.8.133.86 ./GYM-protfolio/deploy.sh"
                 }
             }
         }
