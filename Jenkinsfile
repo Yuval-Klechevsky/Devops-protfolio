@@ -105,7 +105,8 @@ pipeline {
                         echo "${message}"
                         Ver_Calc=sh (script: "bash tags-init.sh ",returnStdout: true).trim()
                         echo "${Ver_Calc}"
-                        sh  """     
+                        sh  """   
+                          
                             git tag --list
                             git switch main
                             git fetch origin --tags
