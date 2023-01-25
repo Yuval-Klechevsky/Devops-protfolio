@@ -1,6 +1,6 @@
 #!/bin/bash
 
-INPUT=$1
+INPUT=${!#}
 
 MAJOR=$(echo $INPUT | cut -d '/' -f2 | cut -d '.' -f1)
 MINOR=$(echo $INPUT | cut -d '/' -f2 | cut -d '.' -f2)
