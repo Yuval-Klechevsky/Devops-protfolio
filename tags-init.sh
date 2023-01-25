@@ -7,7 +7,7 @@ git tag --list
 
 MAJOR=$(echo $INPUT | cut -d '/' -f2 | cut -d '.' -f1)
 MINOR=$(echo $INPUT | cut -d '/' -f2 | cut -d '.' -f2)
-Version=$(git describe --tags | grep $MAJOR.$MINOR)
+Version=$(git tag --list | grep $MAJOR.$MINOR)
 if [ "${Version}" = "" ];then
     Version="${MAJOR}.${MINOR}.1"
 else
