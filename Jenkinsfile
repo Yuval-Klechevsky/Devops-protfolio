@@ -138,7 +138,7 @@ pipeline {
         stage("Deploy to Prodaction"){
             steps{
                 script{
-                    sh ".copy.sh"
+                    sh "./copy.sh"
                     sh "ssh ubuntu@3.8.133.86 ./GYM-protfolio/deploy.sh"
                 }
             }
