@@ -1,5 +1,3 @@
-!#/bin/bash
-
 export New_tag
 docker rmi $(docker images -aq)
 docker pull 644435390668.dkr.ecr.eu-west-2.amazonaws.com/yuval-klechevsky-repo:${New_tag}
