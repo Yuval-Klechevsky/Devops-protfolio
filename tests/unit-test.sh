@@ -1,5 +1,5 @@
 #!/bin/bash
-API_BASE_URL="3.9.146.148"
+API_BASE_URL="13.40.43.228"
 touch response.txt
 response=$(curl -s -o /dev/null -w "%{http_code}" $API_BASE_URL/)
 RESPONSES+=("$response")

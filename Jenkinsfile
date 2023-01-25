@@ -14,8 +14,8 @@ pipeline {
         stage("checkout") {
             when {
                 anyOf {
-                    branch 'main';
-                    branch 'feature'
+                    branch 'main'
+                    branch 'feature/*'
                 }
             }
             steps {
@@ -26,8 +26,8 @@ pipeline {
         stage("AWS login"){
             when {
                 anyOf {
-                    branch 'main';
-                    branch 'feature'
+                    branch 'main'
+                    branch 'feature/*'
                 }
             }
               steps{
@@ -46,8 +46,8 @@ pipeline {
         stage("Build Containers"){
             when {
                 anyOf {
-                    branch 'main';
-                    branch 'feature'
+                    branch 'main'
+                    branch 'feature/*'
                 }
             }
             steps{
@@ -58,14 +58,14 @@ pipeline {
         stage("Unit-test"){
             when {
                 anyOf {
-                    branch 'main';
-                    branch 'feature'
+                    branch 'main'
+                    branch 'feature/*'
                 }
             }
             steps{
             sh  """
                 sleep 5
-                curl 3.9.146.148:80
+                curl 13.40.43.228:80
                 
                 """
             }
@@ -73,8 +73,8 @@ pipeline {
         stage("E2E test app"){
             when {
                 anyOf {
-                    branch 'main';
-                    branch 'feature'
+                    branch 'main'
+                    branch 'feature/*'
                 }
             }
             steps{
@@ -94,24 +94,35 @@ pipeline {
                     """
             }   
         }
-        // stage("Tagging commit and tags"){
-            // when {
-	        // expression {
-		        // return BRANCH == 'main';
-                // }
-            // }
-        // }
-        // stage("Push to ECR"){
-            // when {
-                // expression {
-                // return BRANCH == 'main';
-                // }
-            // }
-            // steps{
-                // script{
-                //    sh "docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${Ver_Calc}"
-                // }
-            // }
-        // }
+        stage("Tagging commit and tags"){
+            when {
+                branch 'main'
+            }
+            steps{ 
+                script{
+                    Ver_Calc=sh (script: "bash tags-init.sh ",returnStdout: true).trim()
+                    echo "${Ver_Calc}"
+                    sh  """
+                        git tag --list
+                        git switch main
+                        git fetch origin --tags
+                        git tag ${Ver_Calc}
+                        git push origin ${Ver_Calc}
+                        git fetch
+
+                        """
+                }
+            }
+        }
+        stage("Push to ECR"){
+            when {
+                branch 'main'
+            }
+            steps{
+                script{
+                   sh "docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${Ver_Calc}"
+                }
+            }
+        }
     }
 }
