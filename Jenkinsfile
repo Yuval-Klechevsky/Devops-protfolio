@@ -137,16 +137,16 @@ pipeline {
         stage("Deploy to Prodaction"){
             steps{
                 script{
-                    sh "scp ./requirements.txt ssh ubuntu@3.8.133.86:/home/ubuntu/"
-                    sh "scp ./mongo.dockerfile ssh ubuntu@3.8.133.86:/home/ubuntu/"
-                    sh "scp ./nginx.dockerfile ssh ubuntu@3.8.133.86:/home/ubuntu/"
-                    sh "scp ./docker-compose-prod.yaml ssh ubuntu@3.8.133.86:/home/ubuntu/"
-                    sh "scp ./init-db.js ssh ubuntu@3.8.133.86:/home/ubuntu/"
-                    sh "scp ./app.py ssh ubuntu@3.8.133.86:/home/ubuntu/"
-                    sh "scp ./tests/unit-test.sh ssh ubuntu@3.8.133.86:/home/ubuntu/tests/"
-                    sh "scp ./nginx/nginx.conf ssh ubuntu@3.8.133.86:/home/ubuntu/nginx/"
-                    sh "scp ./templates/index.html ssh ubuntu@3.8.133.86:/home/ubuntu/templates/"
-                    sh "scp ./deploy.sh ssh ubuntu@3.8.133.86:/home/ubuntu/deploy.sh"
+                    sh "scp ./requirements.txt  ubuntu@3.8.133.86:/home/ubuntu"
+                    sh "scp ./mongo.dockerfile  ubuntu@3.8.133.86:/home/ubuntu"
+                    sh "scp ./nginx.dockerfile  ubuntu@3.8.133.86:/home/ubuntu"
+                    sh "scp ./docker-compose-prod.yaml  ubuntu@3.8.133.86:/home/ubuntu"
+                    sh "scp ./init-db.js ubuntu@3.8.133.86:/home/ubuntu"
+                    sh "scp ./app.py ubuntu@3.8.133.86:/home/ubuntu"
+                    sh "scp ./tests/unit-test.sh ubuntu@3.8.133.86:/home/ubuntu/tests/"
+                    sh "scp ./nginx/nginx.conf ubuntu@3.8.133.86:/home/ubuntu/nginx/"
+                    sh "scp ./templates/index.html ubuntu@3.8.133.86:/home/ubuntu/templates/"
+                    sh "scp ./deploy.sh ubuntu@3.8.133.86:/home/ubuntu"
                     sh "ssh ubuntu@3.8.133.86 bash deploy.sh"
 
 
