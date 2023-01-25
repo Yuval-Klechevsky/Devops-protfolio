@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   flask-app:
-    build: .
+    image: 644435390668.dkr.ecr.eu-west-2.amazonaws.com/yuval-klechevsky-repo:${New_tag}
     links:
       - mongodb
     depends_on:
