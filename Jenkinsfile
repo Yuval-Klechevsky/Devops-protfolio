@@ -36,6 +36,7 @@ pipeline {
                         $class: 'AmazonWebServicesCredentialsBinding',credentialsId: "138f10b8-eef0-4d2b-aae1-9ad183d6b9f7",accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                         secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                     sh  """
+                    
                         aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com 
 
                         """
@@ -115,7 +116,7 @@ pipeline {
                                 git tag ${New_tag}
                                 git push origin ${New_tag}
                                 git fetch
-                                
+
                                 """
                     }
                 }
