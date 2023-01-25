@@ -14,7 +14,7 @@ pipeline {
         stage("checkout") {
             when {
                 anyOf {
-                    br!#anch 'main'
+                    branch 'main'
                     branch 'feature/*'
                 }
             }
