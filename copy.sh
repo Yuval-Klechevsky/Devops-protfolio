@@ -1,5 +1,5 @@
 #!/bin/bash
-ssh ubuntu@35.178.35.133 mkdir GYM-protfolio
+ssh ubuntu@35.178.35.133 mkdir -p GYM-protfolio
 scp ./requirements.txt  ubuntu@35.178.35.133:/home/ubuntu/GYM-protfolio
 scp ./mongo.dockerfile  ubuntu@35.178.35.133:/home/ubuntu/GYM-protfolio
 scp ./nginx.dockerfile  ubuntu@35.178.35.133:/home/ubuntu/GYM-protfolio
