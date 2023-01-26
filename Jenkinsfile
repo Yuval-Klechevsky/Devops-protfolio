@@ -68,7 +68,7 @@ pipeline {
             steps{
             sh  """
                 sleep 5
-                curl 13.40.43.228:80
+                curl 3.10.232.101:80
                 
                 """
             }
@@ -139,7 +139,7 @@ pipeline {
             steps{
                 script{
                     sh "./copy.sh"
-                    sh "ssh ubuntu@3.8.133.86 ./GYM-protfolio/deploy.sh"
+                    sh "ssh ubuntu@35.178.35.133 ./GYM-protfolio/deploy.sh"
                 }
             }
         }
