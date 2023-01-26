@@ -136,6 +136,9 @@ pipeline {
             }
         }
         stage("Deploy to Prodaction"){
+            when {
+                branch 'main'
+            }
             steps{
                 script{
                     sh "./copy.sh ${New_tag}"

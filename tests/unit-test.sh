@@ -70,9 +70,9 @@ fi
 response=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/x-www-form-urlencoded" --data "id=$id"  $API_BASE_URL/delete_subscription)
 RESPONSES+=("$response")
 if [[ $response == *"200"* ]]; then
-  echo "DELETE Request to /subscription was successful." >> response.txt
+  echo "POST Request to /subscription was successful." >> response.txt
 else
-  echo "DELETE Request to /subscription failed." >> response.txt
+  echo "POST Request to /subscription failed." >> response.txt
 fi
 
 for item in "${RESPONSES[@]}"; do
