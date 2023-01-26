@@ -32,7 +32,7 @@ def fetch_subscriptions():
 
     return jsonify({"subscriptions":subscriptions})
 
-@app.route("/subscriptions/ids", methods=[ "GET"])
+@app.route("/subscriptions_ids", methods=[ "GET"])
 def show_all_ids_subcriptions():
     db = get_db()
     _subscriptions= db["GYM_mongodb_tb"].find()
@@ -43,61 +43,71 @@ def show_all_ids_subcriptions():
 
     return jsonify({"subscriptions":subscriptions})
 
-@app.route("/subscriptions/<training_program>", methods=[ "GET"])
-def get_subscription_by_progrem(training_program):
-    if request.method == 'GET': 
+@app.route("/subscriptions_by_training_program", methods=[ "POST"])
+def subscriptions_by_training_program():
+    if request.method == 'POST': 
         db = get_db()
+        training_program = request.form["training_program"]
         subscription = db["GYM_mongodb_tb"].find({"training_program":training_program})
         sub = dumps(subscription)
         return sub
 
-@app.route("/subscription/<id>", methods=[ "GET"])
-def get_subscription(id):
-    if request.method == 'GET': 
+@app.route("/subscription_by_id", methods=[ "POST"])
+def subscription_by_id():
+    if request.method == 'POST': 
         db = get_db()
+        id=request.form["id"]
         subscription = db["GYM_mongodb_tb"].find_one({"_id":ObjectId(id)})
         sub = dumps(subscription)
         return sub
 
-@app.route("/subscription", methods=[ "POST"])
-def get_add_subscription():
-    if request.method == 'POST': 
-        first_name_1 = request.get_json(force=True)["first_name"]
-        last_name_1 = request.get_json(force=True)["last_name"]
-        birth_date_1 = request.get_json(force=True)["birth_date"] 
-        training_program_1 = request.get_json(force=True)["training_program"]
-        weight_1=request.get_json(force=True)["weight"],
-        height_1=request.get_json(force=True)["height"],
+@app.route("/add_subscription", methods=[ "POST"])
+def add_subscription():
+    if request.method == 'POST':
+        first_name = request.form["first_name"]
+        last_name = request.form["last_name"]
+        birth_date = request.form["birth_date"] 
+        training_program = request.form["training_program"]
+        weight=request.form["weight"]
+        height=request.form["height"]
         db = get_db()
-        subscription= db["GYM_mongodb_tb"].insert_one({"first_name": first_name_1 ,
-                                                       "last_name": last_name_1 ,
-                                                       "birth_date":birth_date_1 ,
-                                                       "height":height_1,
-                                                       "weight":weight_1,
-                                                       "training_program":training_program_1})
+
+
+        subscription= db["GYM_mongodb_tb"].insert_one({"first_name": first_name ,
+                                                       "last_name": last_name ,
+                                                       "birth_date":birth_date ,
+                                                       "height":height,
+                                                       "weight":weight,
+                                                       "training_program":training_program})
 
         sub = jsonify(Message='User added successfully!')
         return sub
 
-@app.route("/subscription/<id>", methods=[ "PUT"])
-def get_update_subscription(id):
-    if request.method == 'PUT': 
-        first_name_2 = request.get_json(force=True)["first_name"]
-        last_name_2 = request.get_json(force=True)["last_name"]
-        birth_date_2 = request.get_json(force=True)["birth_date"] 
-        training_program_2 = request.get_json(force=True)["training_program"]
+@app.route("/update_subscription", methods=[ "POST"])
+def update_subscription():
+    if request.method == 'POST': 
+        id=request.form["id"]
+        first_name = request.form["first_name"]
+        last_name = request.form["last_name"]
+        birth_date = request.form["birth_date"] 
+        training_program = request.form["training_program"]
+        weight=request.form["weight"]
+        height=request.form["height"]
         db = get_db()
+                
+
         subscription= db["GYM_mongodb_tb"].update_one({"_id":ObjectId(id)},
-                                                      {'$set':{"first_name": first_name_2,
-                                                       "last_name": last_name_2 ,"birth_date":birth_date_2,
-                                                       "training_program":training_program_2}})
+                                                      {'$set':{"first_name": first_name,
+                                                       "last_name": last_name ,"birth_date":birth_date,
+                                                       "training_program":training_program ,"weight":weight ,"height":height}})
         msg = jsonify(Message='User updated successfully!')
         return msg
 
-@app.route("/subscription/<id>", methods=[ "DELETE"])
-def get_delete_subscription(id):
-    if request.method == 'DELETE': 
+@app.route("/delete_subscription", methods=[ "POST"])
+def delete_subscription():
+    if request.method == 'POST': 
         db = get_db()
+        id=request.form["id"]
         subscription= db["GYM_mongodb_tb"].delete_one({"_id":ObjectId(id)})
         if subscription.deleted_count:
             msg = jsonify(Message='User delete successfully!')
@@ -105,10 +115,11 @@ def get_delete_subscription(id):
             msg = jsonify(Message='Internal Problem!')
     return msg
 
-@app.route("/subscription/<id>/BMI", methods =[ "GET" ])
-def get_BMI_subscription(id):
-    if request.method == 'GET':
+@app.route("/subscription_BMI", methods =[ "POST" ])
+def subscription_BMI():
+    if request.method == 'POST':
         db = get_db()
+        id=request.form["id"]
         weight= ((db["GYM_mongodb_tb"].find_one({"_id":ObjectId(id)},{"weight":1}))) 
         height= ((db["GYM_mongodb_tb"].find_one({"_id":ObjectId(id)},{"height":1})))
 

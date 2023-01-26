@@ -19,47 +19,55 @@ else
   echo "GET Request to /subscriptions failed." >> response.txt
 fi
 
-response=$(curl -s -o /dev/null -w "%{http_code}" -X GET -H "Content-Type: application/x-www-form-urlencoded"  $API_BASE_URL/subscriptions/ids)
+response=$(curl -s -o /dev/null -w "%{http_code}" -X GET -H "Content-Type: application/x-www-form-urlencoded"  $API_BASE_URL/subscriptions_ids)
 RESPONSES+=("$response")
 if [[ $response == *"200"* ]]; then
-  echo "GET Request to /subscriptions/ids was successful." >> response.txt
+  echo "GET Request to /subscriptions_ids was successful." >> response.txt
 else
-  echo "GET Request to /subscriptions/ids failed." >> response.txt
+  echo "GET Request to /subscriptions_ids failed." >> response.txt
 fi
 
-response=$(curl -s -o /dev/null -w "%{http_code}" -X GET -H "Content-Type: application/x-www-form-urlencoded"  $API_BASE_URL/subscriptions/training_program)
+response=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/x-www-form-urlencoded" --data "training_program=AB"  $API_BASE_URL/subscriptions_by_training_program)
 RESPONSES+=("$response")
 if [[ $response == *"200"* ]]; then
-  echo "GET Request to /subscriptions/training_program was successful." >> response.txt
+  echo "POST Request to /subscriptions_by_training_program was successful." >> response.txt
 else
-  echo "GET Request to /subscriptions/training_program failed." >> response.txt
+  echo "POST Request to /subscriptions_by_training_program failed." >> response.txt
 fi
 
-response=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/x-www-form-urlencoded" -d '{"first_name": "Lebron ","last_name": "James" ,"birth_date":"30/12/1984","weight": "113","height": "206","training_program": "Full-Body"}' $API_BASE_URL/subscription)
+response=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/x-www-form-urlencoded" --data "id=$id" $API_BASE_URL/subscription_by_id)
 RESPONSES+=("$response")
 if [[ $response == *"200"* ]]; then
-  echo "POST Request to /subscription was successful." >> response.txt
+  echo "POST Request to /subscription_by_id was successful." >> response.txt
 else
-  echo "POST Request to /subscription failed." >> response.txt
+  echo "POST Request to /subscription_by_id failed." >> response.txt
 fi
 
-response=$(curl -s -o /dev/null -w "%{http_code}" -X PUT -H "Content-Type: application/x-www-form-urlencoded" -d '{"first_name": "Yuval ","last_name": "Klechevsky" ,"birth_date":"27/10/2000","weight": "73","height": "174","training_program": "Full-Body"}' $API_BASE_URL/subscription/$id)
+response=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/x-www-form-urlencoded" --data "first_name=first_name&last_name=last_name&birth_date=birth_date&training_program=AB&weight=70&height=174"  $API_BASE_URL/add_subscription)
 RESPONSES+=("$response")
 if [[ $response == *"200"* ]]; then
-  echo "PUT Request to /subscription/id was successful." >> response.txt
+  echo "POST Request to /add_subscription was successful." >> response.txt
 else
-  echo "PUT Request to /subscription/id failed." >> response.txt
+  echo "POST Request to /add_subscription failed." >> response.txt
 fi
 
-response=$(curl -s -o /dev/null -w "%{http_code}" -X GET -H "Content-Type: application/x-www-form-urlencoded"  $API_BASE_URL/subscription/$id/BMI)
+response=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/x-www-form-urlencoded" --data "id=$id&first_name=first_name&last_name=last_name&birth_date=birth_date&training_program=AB&weight=73&height=174" $API_BASE_URL/update_subscription)
 RESPONSES+=("$response")
 if [[ $response == *"200"* ]]; then
-   echo "GET Request to /subscription/id/BMI was successful." >> response.txt
+  echo "POST Request to /update_subscription was successful." >> response.txt
 else
-   echo "GET Request to /subscription/id/BMI failed." >> response.txt
+  echo "POST Request to /update_subscription failed." >> response.txt
 fi
 
-response=$(curl -s -o /dev/null -w "%{http_code}" -X DELETE -H "Content-Type: application/x-www-form-urlencoded"  $API_BASE_URL/subscription/$id)
+response=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/x-www-form-urlencoded" --data "id=$id"  $API_BASE_URL/subscription_BMI)
+RESPONSES+=("$response")
+if [[ $response == *"200"* ]]; then
+   echo "POST Request to /subscription_BMI was successful." >> response.txt
+else
+   echo "POST Request to /subscription_BMI failed." >> response.txt
+fi
+
+response=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/x-www-form-urlencoded" --data "id=$id"  $API_BASE_URL/delete_subscription)
 RESPONSES+=("$response")
 if [[ $response == *"200"* ]]; then
   echo "DELETE Request to /subscription was successful." >> response.txt
