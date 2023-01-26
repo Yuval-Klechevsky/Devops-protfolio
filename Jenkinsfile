@@ -36,6 +36,7 @@ pipeline {
                         $class: 'AmazonWebServicesCredentialsBinding',credentialsId: "138f10b8-eef0-4d2b-aae1-9ad183d6b9f7",accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                         secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                     sh  """
+
                         aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com 
 
                         """
@@ -51,8 +52,10 @@ pipeline {
                 }
             }
             steps{
-                sh  "docker-compose build --no-cache"
-                sh  "docker-compose up -d"
+
+                sh  "docker build -t ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME} ."
+                sh  "docker-compose -f docker-compose.yaml build --no-cache"
+                sh  "docker-compose -f docker-compose.yaml up -d"
             }          
         }
         stage("Unit-test"){
@@ -65,7 +68,7 @@ pipeline {
             steps{
             sh  """
                 sleep 5
-                curl 3.9.146.148:80
+                curl 3.10.232.101:80
                 
                 """
             }
@@ -94,24 +97,50 @@ pipeline {
                     """
             }   
         }
-        // stage("Tagging commit and tags"){
-            // when {
-	        // expression {
-		        // return BRANCH == 'main';
-                // }
-            // }
-        // }
-        // stage("Push to ECR"){
-            // when {
-                // expression {
-                // return BRANCH == 'main';
-                // }
-            // }
-            // steps{
-                // script{
-                //    sh "docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${Ver_Calc}"
-                // }
-            // }
-        // }
+        stage("Tagging commit and tags"){
+            when {
+                branch 'main'
+            }
+            steps{ 
+                script{
+                          env.GIT_COMMIT_MSG = sh(script: "git log -1 --pretty=%B ${env.GIT_COMMIT}", returnStdout: true).trim()
+                        if(GIT_COMMIT_MSG.contains("version")){
+                            sh  """
+                                git switch main
+                                git fetch origin --tags
+                                git tag --list
+
+                                """
+                            Ver_Calc=sh(script: "bash tags-init.sh ${GIT_COMMIT_MSG}",returnStdout: true).trim()
+                            New_tag=Ver_Calc.split("\n").last()
+                            echo "${New_tag}"
+                            sh  """
+                                git tag ${New_tag}
+                                git push origin ${New_tag}
+                                git fetch
+
+                                """
+                    }
+                }
+            }
+        }
+        stage("Push to ECR"){
+            when {
+                branch 'main'
+            }
+            steps{
+                script{
+                    sh "docker tag  ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}  ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${New_tag} "
+                    sh "docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${New_tag}"
+                }
+            }
+        }
+        stage("Deploy to Prodaction"){
+            steps{
+                script{
+                    sh "./copy.sh ${New_tag}"
+                }
+            }
+        }
     }
 }
