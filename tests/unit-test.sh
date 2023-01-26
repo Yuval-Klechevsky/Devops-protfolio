@@ -75,9 +75,6 @@ else
   echo "DELETE Request to /subscription failed." >> response.txt
 fi
 
-
-
-
 for item in "${RESPONSES[@]}"; do
   if [[ $item == 200 ]]; then
     continue
