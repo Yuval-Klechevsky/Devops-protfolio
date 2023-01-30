@@ -4,8 +4,8 @@ THE ISLAND GYM
 
 ![img](Screenshot.png)
 
-Hello this project launched a website for a managing subscriptions on a new gym in the city, featuring a simple frontend with severl API's.
-This project follow by the CI/CD workflow ensuring that the website is always up-to-date and always work in clean and smoothly
+Hello this project Developed a container that launched a website for a managing subscriptions on a new gym in the city, featuring a simple frontend with severl API's.
+This project follow by the CI/CD workflow ensuring that the website is always up-to-date and always work in clean and smoothly with Automated multi-branch Jenkins pipeline
 
 CI/CD workflow:
 1. Pull
@@ -17,5 +17,4 @@ CI/CD workflow:
 7. Deplyment
 
 Each step in this workflow is designed to ensure that the website is always working as expected ,
-and it is buliding on the lastest version of the code that we deploy it and guarantee to the Gym staff the best smooth and clean experience
-
+and it is buliding on the lastest version of the code that we deploy and guarantee to the GYM staff the best smooth and clean experience to manage subscriptions
