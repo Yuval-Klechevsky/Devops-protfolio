@@ -12,9 +12,9 @@ CI/CD workflow:
 2. Build
 3. Unit-Test
 4. End-To-End Test
-5.Tagging
-6.Publishing
-7.Deplyment
+5. Tagging
+6. Publishing
+7. Deplyment
 
 Each step in this workflow is designed to ensure that the website is always working as expected ,
 and it is buliding on the lastest version of the code that we deploy it and guarantee to the Gym staff the best smooth and clean experience
