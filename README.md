@@ -2,7 +2,7 @@ THE ISLAND GYM
 ===
 > CI/CD Project
 
-![img](screenshot.png)
+![img](Screenshot .png)
 
 Hello this project launched a website for a managing subscriptions on a new gym in the city, featuring a simple frontend with severl API's.
 This project follow by the CI/CD workflow ensuring that the website is always up-to-date and always work in clean and smoothly
