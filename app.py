@@ -1,11 +1,13 @@
 from flask import Flask , render_template,jsonify,request
 from pymongo import MongoClient
+from prometheus_flask_exporter import PrometheusMetrics
 from bson.json_util import dumps
 from bson.objectid import ObjectId
 import pymongo
 import os
 
 app = Flask(__name__)
+metrics = PrometheusMetrics(app, group_by='endpoint')
 
 def get_db():
     client=MongoClient(host='mongodb://root:Aa123456@mongodb:27017/GYM_mongodb',port=27017,username="root",password="Aa123456",authSource="admin")
@@ -146,7 +148,8 @@ def id_for_e2e_testing():
         spacific_id=str(ids["_id"])
         
         return spacific_id
-
+    
+    
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=5000)
 
