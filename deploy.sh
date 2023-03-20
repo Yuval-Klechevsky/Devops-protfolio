@@ -7,4 +7,3 @@ docker compose -f docker-compose-prod.yaml  build --no-cache
 docker compose -f docker-compose-prod.yaml up -d
 sleep 10
 curl 3.10.54.10:80 
-   
