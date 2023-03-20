@@ -1,5 +1,3 @@
-#!/bin/bash
-
 INPUT=${!#}
 
 MAJOR=$(echo $INPUT | cut -d '/' -f2 | cut -d '.' -f1) 
