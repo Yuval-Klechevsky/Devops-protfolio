@@ -104,8 +104,8 @@ pipeline {
             steps{ 
                 script{
                         withCredentials([usernamePassword(credentialsId: 'ea6e3ba5-b6c6-4abc-8e76-d14c8cc6ea53', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
-                          env.GIT_COMMIT_MSG = sh(script: "git log -1 --pretty=%B ${env.GIT_COMMIT}", returnStdout: true).trim()
-                        if(GIT_COMMIT_MSG.contains("version")){
+                            env.GIT_COMMIT_MSG = sh(script: "git log -1 --pretty=%B ${env.GIT_COMMIT}", returnStdout: true).trim()
+                         if(GIT_COMMIT_MSG.contains("version")){
                             sh  """
                                 git switch main
                                 git fetch origin --tags
@@ -121,10 +121,10 @@ pipeline {
                                 git fetch
 
                                 """
-                        }
-                    }   
+                            }
+                        }      
+                    }
                 }
-            }
         }
         stage("Push to ECR"){
             when {
