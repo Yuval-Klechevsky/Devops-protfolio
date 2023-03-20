@@ -1,4 +1,4 @@
-version: '3.4'
+version: '3'
 services:
   flask-app:
     build: .
@@ -34,4 +34,4 @@ services:
     depends_on:
       - flask-app
 volumes:
-  mongo-data: {}
+  mongo-data:
