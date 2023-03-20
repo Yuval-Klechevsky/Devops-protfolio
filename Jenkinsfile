@@ -68,7 +68,7 @@ pipeline {
             steps{
             sh  """
                 sleep 5
-                curl 3.8.97.50:80
+                curl 3.8.210.200:80
                 
                 """
             }
