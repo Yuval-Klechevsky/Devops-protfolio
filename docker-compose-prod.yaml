@@ -5,7 +5,7 @@ services:
     links:
       - mongodb
     depends_on:
-      mongodb:
+      - mongodb
         condition: service_healthy
 
   mongodb:
