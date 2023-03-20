@@ -14,3 +14,4 @@ scp ./templates/index.html ubuntu@3.10.54.10:/home/ubuntu/GYM-protfolio/template
 scp ./deploy.sh ubuntu@3.10.54.10:/home/ubuntu/GYM-protfolio
 ssh ubuntu@3.10.54.10 ./GYM-protfolio/deploy.sh $New_tag
 
+
