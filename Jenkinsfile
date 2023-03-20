@@ -117,7 +117,7 @@ pipeline {
                             echo "${New_tag}"
                             sh  """
                                 git tag ${New_tag}
-                                git push origin https://github.com/Yuval-Klechevsky/Devops-protfolio.git ${New_tag}
+                                git push origin ${New_tag}
                                 git fetch
 
                                 """
