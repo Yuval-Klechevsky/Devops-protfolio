@@ -33,7 +33,7 @@ pipeline {
               steps{
                 script{
                     withCredentials([[
-                        $class: 'AmazonWebServicesCredentialsBinding',credentialsId: "138f10b8-eef0-4d2b-aae1-9ad183d6b9f7",accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                        $class: 'AmazonWebServicesCredentialsBinding',credentialsId: "1d78e1745-3552-4aef-8a3f-cfd6866d2d06",accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                         secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                     sh  """
 
@@ -68,7 +68,7 @@ pipeline {
             steps{
             sh  """
                 sleep 5
-                curl 3.10.232.101:80
+                curl 3.8.97.50:80
                 
                 """
             }
