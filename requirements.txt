@@ -8,4 +8,4 @@ pip==22.0.2
 pymongo==4.3.3
 setuptools==59.6.0
 Werkzeug==2.2.2
-
+prometheus-flask-exporter==0.22.3
