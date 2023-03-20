@@ -4,7 +4,7 @@ pipeline {
         timestamps()
     }
     environment{
-        AWS_ACCOUNT_ID="644435390668"
+        AWS_ACCOUNT_ID="863254239753"
         AWS_DEFAULT_REGION="eu-west-2"
         IMAGE_REPO_NAME="yuval-klechevsky-repo"
         IMAGE_TAG="latest"
