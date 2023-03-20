@@ -35,5 +35,3 @@ services:
       - flask-app
 volumes:
   mongo-data:
-
-
