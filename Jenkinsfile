@@ -36,7 +36,7 @@ pipeline {
                         $class: 'AmazonWebServicesCredentialsBinding',credentialsId: "d78e1745-3552-4aef-8a3f-cfd6866d2d06",accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                         secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                     sh  """
-
+                        
                         aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com 
 
                         """
