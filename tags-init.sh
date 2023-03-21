@@ -10,7 +10,7 @@ else
     MAJOR=$(echo $BDIKA | cut -d '/' -f2 | cut -d '.' -f1)
     MINOR=$(echo $BDIKA | cut -d '/' -f2 | cut -d '.' -f2)
     PATCH=$(echo $BDIKA | cut -d '/' -f2 | cut -d '.' -f3)
-    NEW_PATCH='expr $PATCH + 1'
+    NEW_PATCH='expr ${PATCH} + 1'
     Version="${MAJOR}.${MINOR}.${NEW_PATCH}"
 fi
 
