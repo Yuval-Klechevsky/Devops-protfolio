@@ -33,7 +33,7 @@ pipeline {
               steps{
                 script{
                     withCredentials([[
-                        $class: 'AmazonWebServicesCredentialsBinding',credentialsId: "d78e1745-3552-4aef-8a3f-cfd6866d2d06",accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                        $class: 'AmazonWebServicesCredentialsBinding',credentialsId: "57795a39-caf6-44a7-96de-ebdd90b1635e  ",accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                         secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                     sh  """
 
@@ -68,7 +68,7 @@ pipeline {
             steps{
             sh  """
                 sleep 5
-                curl 3.8.210.200:80
+                curl 35.178.172.71:80
                 
                 """
             }
@@ -103,7 +103,7 @@ pipeline {
             }
             steps{ 
                 script{
-                        withCredentials([gitUsernamePassword(credentialsId: 'ea6e3ba5-b6c6-4abc-8e76-d14c8cc6ea53',gitToolName: 'Default')]) {
+                        withCredentials([gitUsernamePassword(credentialsId: 'dcf0d905-221e-4fb1-8e9c-e037187c2bbf',gitToolName: 'Default')]) {
                             env.GIT_COMMIT_MSG = sh(script: "git log -1 --pretty=%B ${env.GIT_COMMIT}", returnStdout: true).trim()
                          if(GIT_COMMIT_MSG.contains("version")){
                             sh  """
