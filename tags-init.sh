@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+#!/bin/bash
+
+>>>>>>> 77d5b81b407cd5e59222f0518a21770f330999ea
 INPUT=${!#}
 
 MAJOR=$(echo $INPUT | cut -d '/' -f2 | cut -d '.' -f1) 

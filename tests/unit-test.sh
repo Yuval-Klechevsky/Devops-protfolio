@@ -1,5 +1,9 @@
 #!/bin/bash
+<<<<<<< HEAD
 API_BASE_URL="35.178.172.71"
+=======
+API_BASE_URL="3.10.232.101"
+>>>>>>> 77d5b81b407cd5e59222f0518a21770f330999ea
 touch response.txt
 response=$(curl -s -o /dev/null -w "%{http_code}" $API_BASE_URL/)
 RESPONSES+=("$response")
@@ -36,6 +40,8 @@ else
 fi
 
 response=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/x-www-form-urlencoded" --data "id=$id" $API_BASE_URL/subscription_by_id)
+<<<<<<< HEAD
+=======
 RESPONSES+=("$response")
 if [[ $response == *"200"* ]]; then
   echo "POST Request to /subscription_by_id was successful." >> response.txt
@@ -68,6 +74,40 @@ else
 fi
 
 response=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/x-www-form-urlencoded" --data "id=$id"  $API_BASE_URL/delete_subscription)
+>>>>>>> 77d5b81b407cd5e59222f0518a21770f330999ea
+RESPONSES+=("$response")
+if [[ $response == *"200"* ]]; then
+  echo "POST Request to /subscription_by_id was successful." >> response.txt
+else
+  echo "POST Request to /subscription_by_id failed." >> response.txt
+fi
+
+<<<<<<< HEAD
+response=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/x-www-form-urlencoded" --data "first_name=first_name&last_name=last_name&birth_date=birth_date&training_program=AB&weight=70&height=174"  $API_BASE_URL/add_subscription)
+RESPONSES+=("$response")
+if [[ $response == *"200"* ]]; then
+  echo "POST Request to /add_subscription was successful." >> response.txt
+else
+  echo "POST Request to /add_subscription failed." >> response.txt
+fi
+
+response=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/x-www-form-urlencoded" --data "id=$id&first_name=first_name&last_name=last_name&birth_date=birth_date&training_program=AB&weight=73&height=174" $API_BASE_URL/update_subscription)
+RESPONSES+=("$response")
+if [[ $response == *"200"* ]]; then
+  echo "POST Request to /update_subscription was successful." >> response.txt
+else
+  echo "POST Request to /update_subscription failed." >> response.txt
+fi
+
+response=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/x-www-form-urlencoded" --data "id=$id"  $API_BASE_URL/subscription_BMI)
+RESPONSES+=("$response")
+if [[ $response == *"200"* ]]; then
+   echo "POST Request to /subscription_BMI was successful." >> response.txt
+else
+   echo "POST Request to /subscription_BMI failed." >> response.txt
+fi
+
+response=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H "Content-Type: application/x-www-form-urlencoded" --data "id=$id"  $API_BASE_URL/delete_subscription)
 RESPONSES+=("$response")
 if [[ $response == *"200"* ]]; then
   echo "DELETE Request to /subscription was successful." >> response.txt
@@ -75,6 +115,8 @@ else
   echo "DELETE Request to /subscription failed." >> response.txt
 fi
 
+=======
+>>>>>>> 77d5b81b407cd5e59222f0518a21770f330999ea
 for item in "${RESPONSES[@]}"; do
   if [[ $item == 200 ]]; then
     continue
