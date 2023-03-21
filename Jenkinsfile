@@ -68,11 +68,7 @@ pipeline {
             steps{
             sh  """
                 sleep 5
-<<<<<<< HEAD
                 curl 35.178.172.71:80
-=======
-                curl 3.10.232.101:80
->>>>>>> 77d5b81b407cd5e59222f0518a21770f330999ea
                 
                 """
             }
@@ -107,14 +103,9 @@ pipeline {
             }
             steps{ 
                 script{
-<<<<<<< HEAD
                         withCredentials([gitUsernamePassword(credentialsId: 'dcf0d905-221e-4fb1-8e9c-e037187c2bbf',gitToolName: 'Default')]) {
                             env.GIT_COMMIT_MSG = sh(script: "git log -1 --pretty=%B ${env.GIT_COMMIT}", returnStdout: true).trim()
                          if(GIT_COMMIT_MSG.contains("version")){
-=======
-                          env.GIT_COMMIT_MSG = sh(script: "git log -1 --pretty=%B ${env.GIT_COMMIT}", returnStdout: true).trim()
-                        if(GIT_COMMIT_MSG.contains("version")){
->>>>>>> 77d5b81b407cd5e59222f0518a21770f330999ea
                             sh  """
                                 git switch main
                                 git fetch origin --tags
