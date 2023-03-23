@@ -15,7 +15,7 @@ db.GYM_mongodb_tb.insertMany([
         "first_name": "Rafael ",
         "last_name": "Nadal" ,
         "birth_date":"3/6/1986",
-        "weight": "81 ",
+        "weight": "81",
         "height": "182",
         "training_program": "Full-Body"
     },
